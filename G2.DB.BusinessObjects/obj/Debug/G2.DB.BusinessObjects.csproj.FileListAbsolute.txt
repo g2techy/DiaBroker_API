@@ -1,0 +1,6 @@
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessObjects\bin\Debug\G2.DB.BusinessObjects.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessObjects\bin\Debug\G2.DB.BusinessObjects.pdb
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessObjects\obj\Debug\G2.DB.BusinessObjects.csproj.CoreCompileInputs.cache
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessObjects\obj\Debug\G2.DB.BusinessObjects.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessObjects\obj\Debug\G2.DB.BusinessObjects.pdb
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessObjects\obj\Debug\G2.DB.BusinessObjects.csprojResolveAssemblyReference.cache

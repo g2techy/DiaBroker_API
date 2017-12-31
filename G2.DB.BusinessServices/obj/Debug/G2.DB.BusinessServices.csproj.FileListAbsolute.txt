@@ -1,0 +1,11 @@
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\bin\Debug\G2.DB.BusinessServices.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\bin\Debug\G2.DB.BusinessServices.pdb
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\bin\Debug\G2.DAL.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\bin\Debug\G2.DB.BusinessObjects.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\bin\Debug\G2.Frameworks.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\bin\Debug\log4net.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\bin\Debug\G2.DB.BusinessObjects.pdb
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\obj\Debug\G2.DB.BusinessServices.csprojResolveAssemblyReference.cache
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\obj\Debug\G2.DB.BusinessServices.csproj.CoreCompileInputs.cache
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\obj\Debug\G2.DB.BusinessServices.dll
+G:\G2\Projects\ML_Angular\Api\G2.DB.BusinessServices\obj\Debug\G2.DB.BusinessServices.pdb
