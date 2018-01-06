@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Api/logs
+/G2.DB.BusinessObjects/bin
+/G2.DB.BusinessObjects/obj
+/G2.DB.BusinessServices/bin
+/G2.DB.BusinessServices/obj

@@ -9,8 +9,8 @@ using BO = G2.DB.BusinessObjects;
 
 namespace G2.DB.Api.Controllers
 {
+	[Infrastructure.Filters.AuthorizationFilter(Infrastructure.Constants.UserRole.broker)]
 	[RoutePrefix("api/party")]
-	[System.Web.Http.Cors.EnableCors("*", "*", "*")]
 	public class PartyController : Infrastructure.Core.BaseApiController
 	{
 		#region DI settings

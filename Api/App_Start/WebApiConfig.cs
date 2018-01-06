@@ -24,6 +24,8 @@ namespace G2.DB.Api
 
 			var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
 			jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+			config.Filters.Add(new Infrastructure.Filters.OAuthAuthenticationFilter());
 		}
 	}
 }

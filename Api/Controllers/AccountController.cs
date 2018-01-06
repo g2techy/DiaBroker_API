@@ -9,8 +9,8 @@ using BS = G2.DB.BusinessServices;
 
 namespace G2.DB.Api.Controllers
 {
+	[Infrastructure.Filters.AuthorizationFilter(Infrastructure.Constants.UserRole.Admin)]
 	[RoutePrefix("api/account")]
-	[System.Web.Http.Cors.EnableCors("*", "*", "*")]
 	public class AccountController : Infrastructure.Core.BaseApiController
 	{
 		#region DI settings
@@ -114,10 +114,7 @@ namespace G2.DB.Api.Controllers
 			return Ok(_model);
 		}
 
-
-
 		#endregion
-
 
 		#region Private methods
 
