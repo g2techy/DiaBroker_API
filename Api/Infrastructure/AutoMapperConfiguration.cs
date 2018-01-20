@@ -21,6 +21,17 @@ namespace G2.DB.Api.Infrastructure
 			config.CreateMap<Models.PartySearchVM, BO.PartySearchBO>().ReverseMap();
 			config.CreateMap<Models.PartySearchResultVM, BO.PartySearchResultBO>().ReverseMap();
 
+			config.CreateMap<Models.SaleVM, BO.SaleBO>().ReverseMap();
+			config.CreateMap<Models.SaleAddVM, BO.SaleAddBO>().ReverseMap();
+			config.CreateMap<Models.SaleSearchVM, BO.SaleSearchBO>().ReverseMap();
+			config.CreateMap<Models.SaleSearchResultVM, BO.SaleSearchResultBO>().ReverseMap();
+
+			config.CreateMap<Models.SaleBrokerage, BO.SaleBrokerageBO>().ReverseMap();
+			config.CreateMap<Models.SaleBrokerageAddVM, BO.SaleBrokerageAddBO>().ReverseMap();
+			config.CreateMap<Models.SaleBrokPaymentVM, BO.SaleBrokPaymentBO>().ReverseMap();
+
+			config.CreateMap<Models.SalePayment, BO.SalePaymentBO>().ReverseMap();
+
 		}
 	}
 }

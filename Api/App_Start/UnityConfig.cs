@@ -49,6 +49,7 @@ namespace G2.DB.Api
 		{
 			container.RegisterType<BS.Contracts.IAccountService, BS.Factories.AccountService>();
 			container.RegisterType<BS.Contracts.IPartyService, BS.Factories.PartyService>();
+			container.RegisterType<BS.Contracts.ISaleService, BS.Factories.SaleService>();
 		}
 
 		public static void RegisterControllerDependencies(IUnityContainer container)

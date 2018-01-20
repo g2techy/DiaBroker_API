@@ -6,6 +6,8 @@ namespace G2.DB.BusinessServices
 {
 	public abstract class BaseService : IService
 	{
+		public static string DefaultDateFormat = "MM/dd/yyyy";
+
 		private DAL.IDatabaseAccess _dbAccess = null;
 
 		public DAL.IDatabaseAccess DatabaseAccess
@@ -32,6 +34,19 @@ namespace G2.DB.BusinessServices
 		{
 
 		}
-				
+
+		public string GetDateIntoString(string date)
+		{
+			string _returnVal = string.Empty;
+			DateTime _dt;
+			if (DateTime.TryParse(date, out _dt))
+			{
+				if (_dt.Year != 0001)
+				{
+					_returnVal = _dt.ToString(BaseService.DefaultDateFormat);
+				}
+			}
+			return _returnVal;
+		}
 	}
 }
