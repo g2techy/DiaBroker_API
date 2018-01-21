@@ -271,3 +271,11 @@ G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.csprojResolveAss
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.csproj.CoreCompileInputs.cache
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.dll
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.pdb
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\ClosedXML.dll
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\DocumentFormat.OpenXml.dll
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\FastMember.Signed.dll
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\System.IO.FileSystem.Primitives.dll
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\System.IO.Packaging.dll
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\ClosedXML.pdb
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\ClosedXML.xml
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\DocumentFormat.OpenXml.xml

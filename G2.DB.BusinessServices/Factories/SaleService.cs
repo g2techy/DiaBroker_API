@@ -506,6 +506,97 @@ namespace G2.DB.BusinessServices.Factories
 			return _ID;
 		}
 
+		public DataTable GetSalesReport(BO.SalesReportBO bm)
+		{
+			DataTable _returnVal = null;
+
+			try
+			{
+				DatabaseAccess.OpenConnection();
+
+				var _paramList = new List<DAL.DatabaseParameter>()
+				{
+					new DAL.DatabaseParameter("@ClientID",DAL.ParameterDirection.In, DAL.DataType.Int, bm.UserID)
+				};
+				string _stDate = GetDateIntoString(bm.StartDate);
+				if (!string.IsNullOrEmpty(bm.StartDate))
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@StartDate", DAL.ParameterDirection.In, DAL.DataType.String, _stDate));
+				}
+				string _endDate = GetDateIntoString(bm.EndDate);
+				if (!string.IsNullOrEmpty(bm.EndDate))
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@EndDate", DAL.ParameterDirection.In, DAL.DataType.String, _endDate));
+				}
+				if (bm.SallerID.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@SallerID", DAL.ParameterDirection.In, DAL.DataType.Int, bm.SallerID));
+				}
+				if (bm.BuyerID.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@BuyerID", DAL.ParameterDirection.In, DAL.DataType.Int, bm.BuyerID));
+				}
+				if (bm.Status.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@Status", DAL.ParameterDirection.In, DAL.DataType.String, bm.Status));
+				}
+				if (bm.DueDays.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@DueDays", DAL.ParameterDirection.In, DAL.DataType.Int, bm.DueDays));
+				}
+
+				DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Report_GetSalesList", _paramList);
+				if (_ds != null && _ds.Tables.Count > 0)
+				{
+					_returnVal = _ds.Tables[0];
+				}
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+
+			return _returnVal;
+		}
+
+		public List<BO.SaleStatusBO> GetSaleStatusList()
+		{
+			List<BO.SaleStatusBO> _statusList = new List<BO.SaleStatusBO>();
+
+			try
+			{
+				DatabaseAccess.OpenConnection();
+				using (DataTable _dt = DatabaseAccess.ExecuteQuery(@"Select * From SalesStatusDetails", null))
+				{
+					if (_dt != null && _dt.Rows.Count > 0)
+					{
+						foreach (DataRow _dr in _dt.Rows)
+						{
+							_statusList.Add(new BO.SaleStatusBO()
+							{
+								StatusID = int.Parse(_dr["SaleStatusID"].ToString()),
+								StatusName = _dr["SaleStatusValue"].ToString()
+							});
+						}
+					}
+				}
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+
+			return _statusList;
+		}
+
 		#endregion
 	}
 }

@@ -169,4 +169,19 @@ namespace G2.DB.Api.Models
 		public string CourierTo { get; set; }
 	}
 
+	public class SaleReportVM : Infrastructure.Core.BaseViewModel
+	{
+		public string StartDate { get; set; }
+		public string EndDate { get; set; }
+		public int? SallerID { get; set; }
+		public int? BuyerID { get; set; }
+		public int? Status { get; set; }
+		public int? DueDays { get; set; }
+	}
+
+	public class SaleStatusVM : Infrastructure.Core.BaseViewModel
+	{
+		public int StatusID { get; set; }
+		public string StatusName { get; set; }
+	}
 }

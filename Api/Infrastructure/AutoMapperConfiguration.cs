@@ -31,6 +31,8 @@ namespace G2.DB.Api.Infrastructure
 			config.CreateMap<Models.SaleBrokPaymentVM, BO.SaleBrokPaymentBO>().ReverseMap();
 
 			config.CreateMap<Models.SalePayment, BO.SalePaymentBO>().ReverseMap();
+			config.CreateMap<Models.SaleReportVM, BO.SalesReportBO>().ReverseMap();
+			config.CreateMap<Models.SaleStatusVM, BO.SaleStatusBO>().ReverseMap();
 
 		}
 	}

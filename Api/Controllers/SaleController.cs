@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BS = G2.DB.BusinessServices;
 using BO = G2.DB.BusinessObjects;
+using System.Data;
 
 namespace G2.DB.Api.Controllers
 {
@@ -310,6 +311,92 @@ namespace G2.DB.Api.Controllers
 				return BadRequest(ex.Message);
 			}
 			return Ok(_bdID);
+		}
+
+		[HttpPost]
+		[Route("report")]
+		public IHttpActionResult GetSaleReport([FromBody] Models.SaleReportVM model)
+		{
+			DataTable _report = null;
+			if (!ModelState.IsValid || model == null)
+			{
+				return BadRequest("Invalid or empty model");
+			}
+			try
+			{
+				model.UserID = base.UserID;
+				_report = _saleService.GetSalesReport(Infrastructure.Utilities.BOVMMapper.Map<Models.SaleReportVM, BO.SalesReportBO>(model));
+			}
+			catch (Exception ex)
+			{
+				base.LogException(ex);
+				return BadRequest(ex.Message);
+			}
+			return Ok(_report);
+		}
+
+		[HttpPost]
+		[Route("downloadReport")]
+		public IHttpActionResult DownloadReport([FromBody] Models.SaleReportVM model)
+		{
+			DataTable _report = null;
+			if (!ModelState.IsValid || model == null)
+			{
+				return BadRequest("Invalid or empty model");
+			}
+			try
+			{
+				model.UserID = base.UserID;
+				_report = _saleService.GetSalesReport(Infrastructure.Utilities.BOVMMapper.Map<Models.SaleReportVM, BO.SalesReportBO>(model));
+			}
+			catch (Exception ex)
+			{
+				base.LogException(ex);
+				return BadRequest(ex.Message);
+			}
+			return new Infrastructure.Core.ExcelActionResult(_report, "SalesReport.xlsx");
+		}
+
+
+		[HttpGet]
+		[Route("download")]
+		[AllowAnonymous]
+		public IHttpActionResult GetDownloadReport()
+		{
+			DataTable _report = null;
+			
+			try
+			{
+				var model = new Models.SaleReportVM()
+				{
+					UserID = base.UserID
+				};
+				_report = _saleService.GetSalesReport(Infrastructure.Utilities.BOVMMapper.Map<Models.SaleReportVM, BO.SalesReportBO>(model));
+			}
+			catch (Exception ex)
+			{
+				base.LogException(ex);
+				return BadRequest(ex.Message);
+			}
+			return new Infrastructure.Core.ExcelActionResult(_report, "SalesReport.xlsx");
+		}
+
+		[HttpGet]
+		[Route("statusList")]
+		public IHttpActionResult GetStatusList()
+		{
+			List<Models.SaleStatusVM> _model = null;
+			try
+			{
+				var _bo = _saleService.GetSaleStatusList();
+				_model = Infrastructure.Utilities.BOVMMapper.Map<List<BO.SaleStatusBO>, List<Models.SaleStatusVM>>(_bo);
+			}
+			catch (Exception ex)
+			{
+				base.LogException(ex);
+				return BadRequest(ex.Message);
+			}
+			return Ok(_model);
 		}
 
 		#endregion

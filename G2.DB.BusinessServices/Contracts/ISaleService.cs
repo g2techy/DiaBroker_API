@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,8 @@ namespace G2.DB.BusinessServices.Contracts
 		int DeletePayment(int payID);
 
 		int CloseSale(int saleID);
+
+		DataTable GetSalesReport(BO.SalesReportBO bm);
+		List<BO.SaleStatusBO> GetSaleStatusList();
 	}
 }

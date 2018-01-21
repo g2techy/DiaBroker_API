@@ -111,4 +111,19 @@ namespace G2.DB.BusinessObjects
 		public string CourierTo { get; set; }
 	}
 
+	public class SalesReportBO : BaseBO
+	{
+		public string StartDate { get; set; }
+		public string EndDate { get; set; }
+		public int? SallerID { get; set; }
+		public int? BuyerID { get; set; }
+		public int? Status { get; set; }
+		public int? DueDays { get; set; }
+	}
+
+	public class SaleStatusBO : BaseBO
+	{
+		public int StatusID { get; set; }
+		public string StatusName { get; set; }
+	}
 }
