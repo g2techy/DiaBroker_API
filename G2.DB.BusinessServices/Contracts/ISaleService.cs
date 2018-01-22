@@ -29,5 +29,6 @@ namespace G2.DB.BusinessServices.Contracts
 
 		DataTable GetSalesReport(BO.SalesReportBO bm);
 		List<BO.SaleStatusBO> GetSaleStatusList();
+		DataTable GetBrokerageReport(BO.BrokerageReportBO bm);
 	}
 }

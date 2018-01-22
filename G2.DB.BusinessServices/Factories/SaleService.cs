@@ -597,6 +597,58 @@ namespace G2.DB.BusinessServices.Factories
 			return _statusList;
 		}
 
+		public DataTable GetBrokerageReport(BO.BrokerageReportBO bm)
+		{
+			DataTable _returnVal = null;
+
+			try
+			{
+				DatabaseAccess.OpenConnection();
+				var _paramList = new List<DAL.DatabaseParameter>()
+				{
+					new DAL.DatabaseParameter("@ClientID",DAL.ParameterDirection.In, DAL.DataType.Int, bm.UserID)
+				};
+				string _stDate = GetDateIntoString(bm.StartDate);
+				if (!string.IsNullOrEmpty(bm.StartDate))
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@StartDate", DAL.ParameterDirection.In, DAL.DataType.String, _stDate));
+				}
+				string _endDate = GetDateIntoString(bm.EndDate);
+				if (!string.IsNullOrEmpty(bm.EndDate))
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@EndDate", DAL.ParameterDirection.In, DAL.DataType.String, _endDate));
+				}
+				if (bm.SallerID.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@SallerID", DAL.ParameterDirection.In, DAL.DataType.Int, bm.SallerID));
+				}
+				if (bm.BuyerID.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@BuyerID", DAL.ParameterDirection.In, DAL.DataType.Int, bm.BuyerID));
+				}
+				if (bm.Status.HasValue)
+				{
+					_paramList.Add(new DAL.DatabaseParameter("@Status", DAL.ParameterDirection.In, DAL.DataType.String, bm.Status));
+				}
+
+				DataSet _ds = DatabaseAccess.ExecuteProcedure("P_Report_GetBrokerageList", _paramList);
+				if (_ds != null && _ds.Tables.Count > 0)
+				{
+					_returnVal = _ds.Tables[0];
+				}
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				DatabaseAccess.CloseConnection();
+			}
+
+			return _returnVal;
+		}
+
 		#endregion
 	}
 }

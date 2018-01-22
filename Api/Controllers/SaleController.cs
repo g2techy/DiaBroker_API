@@ -357,30 +357,6 @@ namespace G2.DB.Api.Controllers
 			return new Infrastructure.Core.ExcelActionResult(_report, "SalesReport.xlsx");
 		}
 
-
-		[HttpGet]
-		[Route("download")]
-		[AllowAnonymous]
-		public IHttpActionResult GetDownloadReport()
-		{
-			DataTable _report = null;
-			
-			try
-			{
-				var model = new Models.SaleReportVM()
-				{
-					UserID = base.UserID
-				};
-				_report = _saleService.GetSalesReport(Infrastructure.Utilities.BOVMMapper.Map<Models.SaleReportVM, BO.SalesReportBO>(model));
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
-			return new Infrastructure.Core.ExcelActionResult(_report, "SalesReport.xlsx");
-		}
-
 		[HttpGet]
 		[Route("statusList")]
 		public IHttpActionResult GetStatusList()
@@ -397,6 +373,50 @@ namespace G2.DB.Api.Controllers
 				return BadRequest(ex.Message);
 			}
 			return Ok(_model);
+		}
+
+		[HttpPost]
+		[Route("brokerageReport")]
+		public IHttpActionResult GetBrokerageReport([FromBody] Models.BrokerageReportVM model)
+		{
+			DataTable _report = null;
+			if (!ModelState.IsValid || model == null)
+			{
+				return BadRequest("Invalid or empty model");
+			}
+			try
+			{
+				model.UserID = base.UserID;
+				_report = _saleService.GetBrokerageReport(Infrastructure.Utilities.BOVMMapper.Map<Models.BrokerageReportVM, BO.BrokerageReportBO>(model));
+			}
+			catch (Exception ex)
+			{
+				base.LogException(ex);
+				return BadRequest(ex.Message);
+			}
+			return Ok(_report);
+		}
+
+		[HttpPost]
+		[Route("downloadBrokerageReport")]
+		public IHttpActionResult DownloadBrokerageReport([FromBody] Models.BrokerageReportVM model)
+		{
+			DataTable _report = null;
+			if (!ModelState.IsValid || model == null)
+			{
+				return BadRequest("Invalid or empty model");
+			}
+			try
+			{
+				model.UserID = base.UserID;
+				_report = _saleService.GetBrokerageReport(Infrastructure.Utilities.BOVMMapper.Map<Models.BrokerageReportVM, BO.BrokerageReportBO>(model));
+			}
+			catch (Exception ex)
+			{
+				base.LogException(ex);
+				return BadRequest(ex.Message);
+			}
+			return new Infrastructure.Core.ExcelActionResult(_report, "BrokerageReport.xlsx");
 		}
 
 		#endregion

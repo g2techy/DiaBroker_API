@@ -126,4 +126,13 @@ namespace G2.DB.BusinessObjects
 		public int StatusID { get; set; }
 		public string StatusName { get; set; }
 	}
+
+	public class BrokerageReportBO : BaseBO
+	{
+		public string StartDate { get; set; }
+		public string EndDate { get; set; }
+		public int? SallerID { get; set; }
+		public int? BuyerID { get; set; }
+		public int? Status { get; set; }
+	}
 }
