@@ -49,9 +49,11 @@
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="Contracts\IAccountService.cs" />
+    <Compile Include="Contracts\IDashboardService.cs" />
     <Compile Include="Contracts\IPartyService.cs" />
     <Compile Include="Contracts\ISaleService.cs" />
     <Compile Include="Factories\AccountService.cs" />
+    <Compile Include="Factories\DashboardService.cs" />
     <Compile Include="Factories\PartyService.cs" />
     <Compile Include="Factories\SaleService.cs" />
     <Compile Include="IService.cs" />

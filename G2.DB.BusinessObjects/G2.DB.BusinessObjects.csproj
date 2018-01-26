@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBO.cs" />
+    <Compile Include="DashboardBO.cs" />
     <Compile Include="PagerBO.cs" />
     <Compile Include="PartyBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
