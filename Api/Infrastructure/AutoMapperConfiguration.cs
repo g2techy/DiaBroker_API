@@ -35,6 +35,13 @@ namespace G2.DB.Api.Infrastructure
 			config.CreateMap<Models.SaleStatusVM, BO.SaleStatusBO>().ReverseMap();
 			config.CreateMap<Models.BrokerageReportVM, BO.BrokerageReportBO>().ReverseMap();
 
+			config.CreateMap<Models.LoanVM, BO.LoanBO>().ReverseMap();
+			config.CreateMap<Models.LoanAddVM, BO.LoanAddBO>().ReverseMap();
+			config.CreateMap<Models.LoanSearchVM, BO.LoanSearchBO>().ReverseMap();
+			config.CreateMap<Models.LoanSearchResultVM, BO.LoanSearchResultBO>().ReverseMap();
+			config.CreateMap<Models.LoanPaymentVM, BO.LoanPaymentBO>().ReverseMap();
+			config.CreateMap<Models.LoanPaymentAddVM, BO.LoanPaymentAddBO>().ReverseMap();
+			config.CreateMap<Models.LoanCalcInterestVM, BO.LoanCalcInterestBO>().ReverseMap();
 		}
 	}
 }
