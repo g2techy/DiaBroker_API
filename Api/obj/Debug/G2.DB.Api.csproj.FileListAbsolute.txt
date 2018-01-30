@@ -125,8 +125,6 @@ G:\G2\Projects\ML_Angular\Api\Api\obj\Debug\G2.DB.Api.pdb
 G:\G2\Projects\ML_Angular\Api\Api\bin\G2.DB.Api.dll.config
 G:\G2\Projects\ML_Angular\Api\Api\bin\G2.DB.Api.dll
 G:\G2\Projects\ML_Angular\Api\Api\bin\G2.DB.Api.pdb
-G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.csprojResolveAssemblyReference.cache
-G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.csproj.CoreCompileInputs.cache
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\ApplicationInsights.config
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\roslyn\csc.exe
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\roslyn\csc.exe.config
@@ -277,5 +275,7 @@ G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\Microsoft.AI.DependencyCollector
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\Microsoft.AI.ServerTelemetryChannel.xml
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\Microsoft.AI.WindowsServer.xml
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\bin\Microsoft.AI.Web.xml
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.csprojResolveAssemblyReference.cache
+G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.csproj.CoreCompileInputs.cache
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.dll
 G:\G2\Projects\ML_Angular\DiaBroker_API\Api\obj\Debug\G2.DB.Api.pdb

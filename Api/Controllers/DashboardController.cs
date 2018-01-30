@@ -7,6 +7,7 @@ using System.Web.Http;
 using BS = G2.DB.BusinessServices;
 using BO = G2.DB.BusinessObjects;
 using System.Data;
+using G2.DB.Api.Infrastructure.Filters;
 
 namespace G2.DB.Api.Controllers
 {
@@ -31,74 +32,54 @@ namespace G2.DB.Api.Controllers
 		public IHttpActionResult ChartData(int chartType)
 		{
 			object _jsonData = null;
-			try
+			var _chartList = (Infrastructure.Constants.ChartList)chartType;
+			switch (_chartList)
 			{
-				var _chartList = (Infrastructure.Constants.ChartList)chartType;
-				switch (_chartList)
-				{
-					case Infrastructure.Constants.ChartList.Last12MonthSales:
-						_jsonData = Last12MonthsSaleChartData();
-						break;
-					case Infrastructure.Constants.ChartList.Last12MonthBrokerage:
-						_jsonData = Last12MonthsBrokerageChartData();
-						break;
-					case Infrastructure.Constants.ChartList.BrokerageDistribution:
-						_jsonData = BrokerageDistributionChartData();
-						break;
-					case Infrastructure.Constants.ChartList.Last12InterestPaid:
-						_jsonData = Last12LoanInterestPaidChartData();
-						break;
-					case Infrastructure.Constants.ChartList.Last24LoanData:
-						_jsonData = Last24MonthsLoanChartData();
-						break;
-					default:
-						break;
-				}
-				if (_jsonData == null)
-				{
-					_jsonData = new
-					{
-						ErrorCode = 1,
-						ErrorMessage = "Chart data not available."
-					};
-				}
+				case Infrastructure.Constants.ChartList.Last12MonthSales:
+					_jsonData = Last12MonthsSaleChartData();
+					break;
+				case Infrastructure.Constants.ChartList.Last12MonthBrokerage:
+					_jsonData = Last12MonthsBrokerageChartData();
+					break;
+				case Infrastructure.Constants.ChartList.BrokerageDistribution:
+					_jsonData = BrokerageDistributionChartData();
+					break;
+				case Infrastructure.Constants.ChartList.Last12InterestPaid:
+					_jsonData = Last12LoanInterestPaidChartData();
+					break;
+				case Infrastructure.Constants.ChartList.Last24LoanData:
+					_jsonData = Last24MonthsLoanChartData();
+					break;
+				default:
+					break;
 			}
-			catch (Exception ex)
+			if (_jsonData == null)
 			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
+				_jsonData = new
+				{
+					Message = "Chart data not available."
+				};
 			}
+
 			return Ok(_jsonData);
 		}
 
 		[HttpPost]
 		[Route("duePayments")]
+		[CheckModelForNullFilter()]
 		public IHttpActionResult DuePayments(Models.PagerVM pager)
 		{
-			if (pager == null || !ModelState.IsValid)
+			var _ssBO = Infrastructure.Utilities.BOVMMapper.Map<Models.SaleSearchVM, BO.SaleSearchBO>(new Models.SaleSearchVM()
 			{
-				return BadRequest("Invalid or empty model");
-			}
-			Models.SaleSearchResultVM _model = null;
-			try
-			{
-				var _ssBO = Infrastructure.Utilities.BOVMMapper.Map<Models.SaleSearchVM, BO.SaleSearchBO>(new Models.SaleSearchVM()
-				{
-					UserID = base.UserID,
-					StartIndex = pager.StartIndex,
-					PageSize = pager.PageSize
-				});
-				var _ssrBO = _dashboardService.GetDuePayments(_ssBO);
-				_model = Infrastructure.Utilities.BOVMMapper.Map<BO.SaleSearchResultBO, Models.SaleSearchResultVM>(_ssrBO);
+				UserID = base.UserID,
+				StartIndex = pager.StartIndex,
+				PageSize = pager.PageSize
+			});
+			var _ssrBO = _dashboardService.GetDuePayments(_ssBO);
+			var _model = Infrastructure.Utilities.BOVMMapper.Map<BO.SaleSearchResultBO, Models.SaleSearchResultVM>(_ssrBO);
 
-				_model.StartIndex = pager.StartIndex;
-				_model.PageSize = pager.PageSize;
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			_model.StartIndex = pager.StartIndex;
+			_model.PageSize = pager.PageSize;
 
 			return Ok(_model);
 		}

@@ -8,3 +8,5 @@
 /G2.DB.BusinessObjects/obj
 /G2.DB.BusinessServices/bin
 /G2.DB.BusinessServices/obj
+/Api/bin/Release/PublishOutput
+/Api/obj/Release

@@ -7,6 +7,7 @@ using System.Web.Http;
 using BS = G2.DB.BusinessServices;
 using BO = G2.DB.BusinessObjects;
 using System.Data;
+using G2.DB.Api.Infrastructure.Filters;
 
 namespace G2.DB.Api.Controllers
 {
@@ -31,46 +32,23 @@ namespace G2.DB.Api.Controllers
 		[Route("borrowerList")]
 		public IHttpActionResult GetBorrowerList(int partyTypeID)
 		{
-			List<Models.Party> _model = null;
 			if (partyTypeID <= 0)
 			{
 				return BadRequest("Invalid party type");
 			}
-			try
-			{
-				var _bo = _loanService.GetBorrowerList(base.UserID, partyTypeID, true);
-				_model = Infrastructure.Utilities.BOVMMapper.Map<List<BO.Party>, List<Models.Party>>(_bo);
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			var _bo = _loanService.GetBorrowerList(base.UserID, partyTypeID, true);
+			var _model = Infrastructure.Utilities.BOVMMapper.Map<List<BO.Party>, List<Models.Party>>(_bo);
 			return Ok(_model);
 		}
 
 		[HttpPost]
 		[Route("search")]
+		[CheckModelForNullFilter()]
 		public IHttpActionResult Search([FromBody] Models.LoanSearchVM model)
 		{
-			Models.LoanSearchResultVM _result = null;
-
-			if (!ModelState.IsValid || model == null)
-			{
-				return BadRequest("Please enter search details.");
-			}
-			try
-			{
-				model.UserID = base.UserID;
-				var _bo = _loanService.GetLoanList(Infrastructure.Utilities.BOVMMapper.Map<Models.LoanSearchVM, BO.LoanSearchBO>(model));
-				_result = Infrastructure.Utilities.BOVMMapper.Map<BO.LoanSearchResultBO, Models.LoanSearchResultVM>(_bo);
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
-
+			model.UserID = base.UserID;
+			var _bo = _loanService.GetLoanList(Infrastructure.Utilities.BOVMMapper.Map<Models.LoanSearchVM, BO.LoanSearchBO>(model));
+			var _result = Infrastructure.Utilities.BOVMMapper.Map<BO.LoanSearchResultBO, Models.LoanSearchResultVM>(_bo);
 			return Ok(_result);
 		}
 
@@ -78,44 +56,23 @@ namespace G2.DB.Api.Controllers
 		[Route("loan")]
 		public IHttpActionResult GetLoanDetails(int loanID)
 		{
-			Models.LoanAddVM _model = null;
 			if (loanID <= 0)
 			{
 				return BadRequest("Invalid loan id.");
 			}
-			try
-			{
-				var _bo = _loanService.GetLoanDetails(base.UserID, loanID);
-				_model = Infrastructure.Utilities.BOVMMapper.Map<BO.LoanAddBO, Models.LoanAddVM>(_bo);
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			var _bo = _loanService.GetLoanDetails(base.UserID, loanID);
+			var _model = Infrastructure.Utilities.BOVMMapper.Map<BO.LoanAddBO, Models.LoanAddVM>(_bo);
 			_model.LoanID = loanID;
 			return Ok(_model);
 		}
 
 		[HttpPost]
 		[Route("add")]
+		[CheckModelForNullFilter()]
 		public IHttpActionResult Add([FromBody] Models.LoanAddVM model)
 		{
-			int _loanID = 0;
-			if (!ModelState.IsValid || model == null)
-			{
-				return BadRequest("Invalid or empty model.");
-			}
-			try
-			{
-				model.UserID = base.UserID;
-				_loanID = _loanService.Add(Infrastructure.Utilities.BOVMMapper.Map<Models.LoanAddVM, BO.LoanAddBO>(model));
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			model.UserID = base.UserID;
+			var _loanID = _loanService.Add(Infrastructure.Utilities.BOVMMapper.Map<Models.LoanAddVM, BO.LoanAddBO>(model));
 			return Ok(_loanID);
 		}
 
@@ -127,15 +84,7 @@ namespace G2.DB.Api.Controllers
 			{
 				return BadRequest("Invalid parameters.");
 			}
-			try
-			{
-				_loanService.Delete(base.UserID, loanID);
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			_loanService.Delete(base.UserID, loanID);
 			return Ok(loanID);
 		}
 
@@ -143,39 +92,21 @@ namespace G2.DB.Api.Controllers
 		[Route("payment")]
 		public IHttpActionResult Payment(int loanID)
 		{
-			List<Models.LoanPaymentVM> _model = null;
-			try
+			if (loanID <= 0)
 			{
-				var _bo = _loanService.GetPaymentList(base.UserID, loanID);
-				_model = Infrastructure.Utilities.BOVMMapper.Map<List<BO.LoanPaymentBO>, List<Models.LoanPaymentVM>>(_bo);
+				return BadRequest("Invalid parameters.");
 			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			var _bo = _loanService.GetPaymentList(base.UserID, loanID);
+			var _model = Infrastructure.Utilities.BOVMMapper.Map<List<BO.LoanPaymentBO>, List<Models.LoanPaymentVM>>(_bo);
 			return Ok(_model);
 		}
 
 		[HttpPost]
 		[Route("addPayment")]
+		[CheckModelForNullFilter()]
 		public IHttpActionResult AddPayment([FromBody] Models.LoanPaymentAddVM model)
 		{
-			int _payID = 0;
-
-			if (model == null || !ModelState.IsValid)
-			{
-				return BadRequest("Invalid or empty model.");
-			}
-			try
-			{
-				_payID = _loanService.AddPayment(Infrastructure.Utilities.BOVMMapper.Map<Models.LoanPaymentAddVM, BO.LoanPaymentAddBO>(model));
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			var _payID = _loanService.AddPayment(Infrastructure.Utilities.BOVMMapper.Map<Models.LoanPaymentAddVM, BO.LoanPaymentAddBO>(model));
 			return Ok(_payID);
 		}
 
@@ -183,21 +114,7 @@ namespace G2.DB.Api.Controllers
 		[Route("deletePayment")]
 		public IHttpActionResult DeletePayment(int payID)
 		{
-			int _payID = 0;
-
-			if (payID <= 0)
-			{
-				return BadRequest("Invalid payment ID.");
-			}
-			try
-			{
-				_payID = _loanService.DeletePayment(payID);
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			var _payID = _loanService.DeletePayment(payID);
 			return Ok(_payID);
 		}
 
@@ -205,7 +122,6 @@ namespace G2.DB.Api.Controllers
 		[Route("calcInterest")]
 		public IHttpActionResult CalcInterest(int loanID, string intAsOn)
 		{
-			List<Models.LoanCalcInterestVM> _model = null;
 			if (loanID <= 0)
 			{
 				return BadRequest("Invalid payment ID.");
@@ -222,16 +138,8 @@ namespace G2.DB.Api.Controllers
 				}
 				catch { _intAsOn = DateTime.Now; }
 			}
-			try
-			{
-				var _bo = _loanService.GetCalcInterest(this.UserID, loanID, _intAsOn);
-				_model = Infrastructure.Utilities.BOVMMapper.Map<List<BO.LoanCalcInterestBO>, List<Models.LoanCalcInterestVM>>(_bo);
-			}
-			catch (Exception ex)
-			{
-				base.LogException(ex);
-				return BadRequest(ex.Message);
-			}
+			var _bo = _loanService.GetCalcInterest(this.UserID, loanID, _intAsOn);
+			var _model = Infrastructure.Utilities.BOVMMapper.Map<List<BO.LoanCalcInterestBO>, List<Models.LoanCalcInterestVM>>(_bo);
 			return Ok(_model);
 		}
 

@@ -259,7 +259,12 @@
     <Compile Include="Infrastructure\Core\BaseViewModel.cs" />
     <Compile Include="Infrastructure\Core\ExcelActionResult.cs" />
     <Compile Include="Infrastructure\Filters\AuthorizationFilter.cs" />
+    <Compile Include="Infrastructure\Filters\CheckModelForNullFilterAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\GlobalExceptionFilterAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\GlobalExceptionHandler.cs" />
+    <Compile Include="Infrastructure\Filters\GlobalExceptionLogger.cs" />
     <Compile Include="Infrastructure\Filters\OAuthAuthenticationFilter.cs" />
+    <Compile Include="Infrastructure\Filters\ValidateModelStateFilterAttribute.cs" />
     <Compile Include="Infrastructure\Providers\OAuthProvider.cs" />
     <Compile Include="Infrastructure\Utilities\BOVMMapper.cs" />
     <Compile Include="Models\LoanVM.cs" />
@@ -282,6 +287,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Log4Net.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

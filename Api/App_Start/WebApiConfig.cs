@@ -26,6 +26,11 @@ namespace G2.DB.Api
 			jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
 			config.Filters.Add(new Infrastructure.Filters.OAuthAuthenticationFilter());
+			config.Filters.Add(new Infrastructure.Filters.ValidateModelStateFilterAttribute());
+			config.Filters.Add(new Infrastructure.Filters.GlobalExceptionFilterAttribute());
+
+			config.Services.Add(typeof(System.Web.Http.ExceptionHandling.IExceptionLogger), new Infrastructure.Filters.GlobalExceptionLogger());
+			config.Services.Replace(typeof(System.Web.Http.ExceptionHandling.IExceptionHandler), new Infrastructure.Filters.GlobalExceptionHandler());
 		}
 	}
 }
